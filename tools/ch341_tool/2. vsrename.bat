@@ -1,0 +1,1 @@
+vsrename.exe ch341_i2c_tool ch341_i2c_tool .\
