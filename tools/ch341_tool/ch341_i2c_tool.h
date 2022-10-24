@@ -9,10 +9,10 @@
 #endif // _MSC_VER > 1000
 
 #ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
+    #error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "resource.h"		// main symbols
+#include "resource.h"        // main symbols
 
 /////////////////////////////////////////////////////////////////////////////
 // Cch341_i2c_toolApp:
@@ -22,22 +22,22 @@
 class Cch341_i2c_toolApp : public CWinApp
 {
 public:
-	Cch341_i2c_toolApp();
+    Cch341_i2c_toolApp();
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(Cch341_i2c_toolApp)
-	public:
-	virtual BOOL InitInstance();
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(Cch341_i2c_toolApp)
+    public:
+    virtual BOOL InitInstance();
+    //}}AFX_VIRTUAL
 
 // Implementation
 
-	//{{AFX_MSG(Cch341_i2c_toolApp)
-		// NOTE - the ClassWizard will add and remove member functions here.
-		//    DO NOT EDIT what you see in these blocks of generated code !
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(Cch341_i2c_toolApp)
+        // NOTE - the ClassWizard will add and remove member functions here.
+        //    DO NOT EDIT what you see in these blocks of generated code !
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 
