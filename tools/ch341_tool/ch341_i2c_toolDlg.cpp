@@ -354,7 +354,97 @@ void Cch341_i2c_toolDlg::OnButtonWrite()
 {
     // TODO: Add your control notification handler code here
     // write i2c bus
+    UINT addr = 0x00;
+    UINT reg_addr = 0x00;
+    UINT read_len = 0;
+    CString temp_str;
+    CString temp_str2;
+    UCHAR wbuffer[mMAX_BUFFER_LENGTH]="";
+    DWORD i = 0;
+    UINT write_dat = 0x00;
 
+    m_i2c_addr.GetWindowText(temp_str);
+    addr = mHexStrToBcd(temp_str);
+
+    if (addr != -1 && addr < 256)
+    {
+        temp_str.Format("i2c addr: 0x%02X\r\n", addr);
+        TRACE(temp_str);
+    }
+    else
+    {
+        AfxMessageBox("I2C address error!", MB_OK|MB_ICONSTOP);
+        return;
+    }
+
+    m_i2c_reg_addr.GetWindowText(temp_str);
+    reg_addr = mHexStrToBcd(temp_str);
+
+    if (reg_addr != -1 && reg_addr < 256)
+    {
+        temp_str.Format("i2c reg addr: 0x%02X\r\n", reg_addr);
+        TRACE(temp_str);
+    }
+    else
+    {
+        AfxMessageBox("I2C reg address error!", MB_OK|MB_ICONSTOP);
+        return;
+    }
+
+    m_read_length.GetWindowText(temp_str);
+    read_len = _tcstoul(temp_str, NULL, 10);
+
+    if (read_len != 0)
+    {
+        temp_str.Format("i2c read length: %d\r\n", read_len);
+        TRACE(temp_str);
+    }
+    else
+    {
+        AfxMessageBox("I2C read length error!", MB_OK|MB_ICONSTOP);
+        return;
+    }
+
+    if (!CH341SetStream(0, m_speed.GetCurSel()))
+    {
+        AfxMessageBox("I2C speed set error!", MB_OK|MB_ICONSTOP);
+        return;
+    }
+
+    m_write_data.GetWindowText(temp_str);
+    write_dat = mHexStrToBcd(temp_str);
+
+    if (write_dat != -1 && write_dat < 256)
+    {
+        temp_str.Format("i2c write data: 0x%02X\r\n", write_dat);
+        TRACE(temp_str);
+    }
+    else
+    {
+        AfxMessageBox("I2C write data error!", MB_OK|MB_ICONSTOP);
+        return;
+    }
+
+    wbuffer[0] = addr;
+    wbuffer[1] = reg_addr;
+    wbuffer[2] = (unsigned char)write_dat;
+
+    try
+    {
+        if(!CH341StreamI2C (0, 3, &wbuffer[0], 0, NULL ))
+        {
+            AfxMessageBox("I2C stream write error!", MB_OK|MB_ICONSTOP);
+            return;
+        }
+        else
+        {
+            //pass
+        }
+    }
+    catch( CException * )
+    {
+        TRACE("Error: %d",GetLastError());
+    }
 }
 
 LONG Cch341_i2c_toolDlg::mHexStrToBcd( CString str )

@@ -35,7 +35,7 @@ Type=0
 BaseClass=CDialog
 HeaderFile=ch341_i2c_toolDlg.h
 ImplementationFile=ch341_i2c_toolDlg.cpp
-LastObject=IDC_COMBO_SPEED
+LastObject=Cch341_i2c_toolDlg
 Filter=D
 VirtualFilter=dWC
 
